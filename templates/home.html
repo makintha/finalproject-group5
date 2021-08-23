@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <!-- Starts image section -->
+    <div class="row justify-content-md-center mb-4">
+        <h2 class='text-primary'>Predict Iris Flower Species</h2>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <img src="{{url_for('static', filename='images/setosa.jpeg')}}" class="img-thumbnail" />
+                <div class="caption">
+                     <p><strong>Iris Setosa</strong></p>
+                   </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <img src="{{url_for('static', filename='images/versicolor.jpeg')}}" class="img-thumbnail" />
+                <div class="caption">
+                     <p><strong>Iris Versicolor</strong></p>
+                   </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <img src="{{url_for('static', filename='images/virginica.jpg')}}" class="img-thumbnail" />
+                <div class="caption">
+                     <p><strong>Iris Virginica</strong></p>
+                   </div>
+            </div>
+        </div>
+    </div>
+    <!-- Ends image section -->
+    
+    <!-- Starts form section -->
+    <div class="form-container ">
+        <form class="form-horizontal" action = "/predict/" method="post">
+        
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="WaterRate">WaterRate:</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="WaterRate" name="WaterRate">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="CasingHeadPressure">Casing Head Pressure:</label>
+              <div class="col-sm-4">          
+                <input type="text" class="form-control" id="CasingHeadPressure" name="CasingHeadPressure">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="TubingHeadPressure">Tubing Head Pressure:</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="TubingHeadPressure" name="TubingHeadPressure">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="PumpSpeed">Pump Speed:</label>
+              <div class="col-sm-4">          
+                <input type="text" class="form-control" id="PumpSpeed" name="PumpSpeed">
+              </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="Torque">Torque:</label>
+                <div class="col-sm-4">          
+                  <input type="text" class="form-control" id="Torque" name="Torque">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="GasRate">GasRate:</label>
+                <div class="col-sm-4">          
+                  <input type="text" class="form-control" id="GasRate" name="GasRate">
+                </div>
+            </div>
+            
+            <div class="form-group row"> 
+            <label class="control-label col-sm-2" for="">&nbsp;</label>                
+              <div class="col-sm-offset-2 col-sm-4">
+                <button type="submit" class="btn btn-primary">Predict</button>
+              </div>
+            </div>
+          </form>
+        <!-- Ends form section -->
+        
+        
+    </div>
+
+
+{% endblock %}
