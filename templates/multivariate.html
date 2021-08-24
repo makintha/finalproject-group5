@@ -1,0 +1,174 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <!-- Starts image section -->
+    <div class="row justify-content-md-center mb-4">
+        <h2 class='text-primary'>Production Gas Rate Forecasting</h2>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <img src="{{url_for('static', filename='images/BHGE.jpg')}}" class="img-thumbnail" />
+                <div class="caption">
+                     <p><strong>Well Head Components</strong></p>
+                   </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <img src="{{url_for('static', filename='images/drilling_riser.png')}}" class="img-thumbnail" />
+                <div class="caption">
+                     <p><strong>Drilling Riser System</strong></p>
+                   </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <img src="{{url_for('static', filename='images/subsea.jpg')}}" class="img-thumbnail" />
+                <div class="caption">
+                     <p><strong>Subsea Wellhead</strong></p>
+                   </div>
+            </div>
+        </div>
+    </div>
+    
+    <br>
+
+    <br>
+
+    <hr>
+    
+
+    <!-- Ends image section -->
+    
+    <!-- Starts form section -->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="form-container ">
+            <form class="form-horizontal" action = "/predict" method="post">
+            
+                <div class="form-group row">
+                  <label class="control-label col" for="WaterRate">WaterRate:</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" id="WaterRate" name="WaterRate">
+                  </div>
+                </div>
+                
+                <div class="form-group row">
+                  <label class="control-label col" for="CasingHeadPressure">Casing Head Pressure:</label>
+                  <div class="col-sm-4">          
+                    <input type="text" class="form-control" id="CasingHeadPressure" name="CasingHeadPressure">
+                  </div>
+                </div>
+    
+                <div class="form-group row">
+                  <label class="control-label col" for="TubingHeadPressure">Tubing Head Pressure:</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" id="TubingHeadPressure" name="TubingHeadPressure">
+                  </div>
+                </div>
+                
+                <div class="form-group row">
+                  <label class="control-label col" for="PumpSpeed">Pump Speed:</label>
+                  <div class="col-sm-4">          
+                    <input type="text" class="form-control" id="PumpSpeed" name="PumpSpeed">
+                  </div>
+                </div>
+    
+                <div class="form-group row">
+                    <label class="control-label col" for="Torque">Torque:</label>
+                    <div class="col-sm-4">          
+                      <input type="text" class="form-control" id="Torque" name="Torque">
+                    </div>
+                </div>
+    
+                <div class="form-group row">
+                    <label class="control-label col" for="GasRate">GasRate:</label>
+                    <div class="col-sm-4">          
+                      <input type="text" class="form-control" id="GasRate" name="GasRate">
+                    </div>
+                </div>
+                
+                <div class="form-group row"> 
+                <label class="control-label col" for="">&nbsp;</label>                
+                  <div class="col-sm-offset-2 col-sm-4">
+                    <button type="submit" class="btn btn-primary">Predict</button>
+                  </div>
+                </div>
+              </form>
+    
+
+            <!-- Ends form section -->
+          </div>          
+        </div>
+        <div class="col-sm-4">
+          <h5> The Gas Rate forecast for the next day is </h5>
+          <h6>
+            {{ prediction }}
+          </h6>
+          <br>
+          <hr>
+          <br>
+          <h5> Coefficient of Features </h5>
+          <!-- <h7> {{ coef }} </h7> -->
+          <!-- {{ coef }} -->
+          {% if coef is not none %}
+          <div class = "row">
+            <div class = "col">
+              <h7>Water Rate</h7>
+            </div>
+            <div class = "col">
+              <h7> {{ coef[0] }} </h7>
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col">
+              <h7>Casing Head Pressure</h7>
+            </div>
+            <div class = "col">
+              <h7> {{ coef[1] }} </h7>
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col">
+              <h7>Tubing Head Pressure</h7>
+            </div>
+            <div class = "col">
+              <h7> {{ coef[2] }} </h7>
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col">
+              <h7>Pump Speed</h7>
+            </div>
+            <div class = "col">
+              <h7> {{ coef[3] }} </h7>
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col">
+              <h7>Torque</h7>
+            </div>
+            <div class = "col">
+              <h7> {{ coef[4] }} </h7>
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col">
+              <h7>Gas Rate</h7>
+            </div>
+            <div class = "col">
+              <h7> {{ coef[5] }} </h7>
+            </div>
+          </div>
+          {% endif %}
+          
+        </div>
+      </div>
+    </div>
+
+
+{% endblock %}

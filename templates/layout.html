@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+  
+  <head>
+   
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    
+    <title> Predict Iris Flower Species </title>
+    <style>
+      img#fig1 {
+        float: right;
+      }
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 450px;
+        table-layout: fixed;
+      }
+      
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+      
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+      </style>
+
+  </head>
+  
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <div class="container-fluid nav_top">
+        <a class="navbar-brand" href="/">Forecast</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse bg-white justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-centre">
+            <li class="nav-item bg-white">
+              <a class="nav-link active comparison" aria-current="page" href="/">Forecasting Method</a>
+            </li>
+            <li class="nav-item bg-white">
+              <a class="nav-link active comparison" aria-current="page" href="/multivariate">Multivariate</a>
+            </li>
+            <li class="nav-item bg-white">
+              <a class="nav-link active data" href="/plots">Visualizations</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+  </nav>
+
+      <div class="container pt-3">
+      
+        <div id="content">{% block content %}{% endblock %}</div>
+      
+        <div id="footer">
+          {% block footer %}
+          <div class="row">
+
+          </div>
+          {% endblock %}
+        </div>
+      </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+    <script scr="../static/js/line.js"></script>
+  </body>
+</html>
