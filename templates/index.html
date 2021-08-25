@@ -75,9 +75,13 @@
                 <td>6</td>
                 <td>15</td>
               </tr>
+              <br>
             </table>
-              We can restructure this time series dataset as a supervised learning problem by using the value at the previous time step to predict the value at the next time-step. Re-organizing the time series dataset this way, the data would look as follows:
-            <table>
+            <br>
+              <p>We can restructure this time series dataset as a supervised learning problem by using the value at the previous time step to predict the value at the next time-step. Re-organizing the time series dataset this way, the data would look as follows:
+            </p>
+            <br>
+              <table>
               <tr>
                 <th>t</th>
                 <th>var1(t-1)</th>
@@ -135,7 +139,10 @@
                 <td>?</td>
               </tr>
             </table>
-            Here are some observations of the transformed dataset above:
+            <br>
+           <p> Here are some observations of the transformed dataset above:
+
+           </p>
             <ul>
               <li>
                 The previous time steps (t-1) are the input (X) and the next time steps (t) is the output (y) in our supervised learning problem.
@@ -150,9 +157,10 @@
                 No known next value to predict for the last value in the sequence. This value will also be deleted while training our supervised model.                
               </li>
             </ul>
-            The use of prior time steps to predict the next time step is called the <strong> sliding window method </strong>. For short, it may be called the window method in some literature. In statistics and time series analysis, this is called a lag or lag method.
+            <p>The use of prior time steps to predict the next time step is called the <strong> sliding window method </strong>. For short, it may be called the window method in some literature. In statistics and time series analysis, this is called a lag or lag method.
             The number of previous time steps is called the window width or size of the lag.
             This sliding window is the basis for how we can turn any time series dataset into a supervised learning problem. From this simple example, we can notice a few things:
+          </p>
             <ul>
               <li>
                 We can see how this can work to turn a time series into either a regression or a classification supervised learning problem for real-valued or labeled time series values.

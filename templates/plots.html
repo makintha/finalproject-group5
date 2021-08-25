@@ -1,34 +1,43 @@
-{% extends "layout.html" %}
+{% extends "layout.html" %} {% block content %}
 
-{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div id="plot7"></div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-lg-12">
+      <div id="plot8"></div>
+    </div>
+  </div>
+<hr>
 
-    <div class="container">
-      <div class="row justify-content-md-center">
-        <div class="col-lg-10">
-          <div id="plot7"></div>
-        </div>
-        <div class="col-lg-2 align-self-center text-center inner-box">
-          <div id="plot8"></div>
-        </div>
-      </div>
-      <div class="row justify-content-md-center">
-        <div class="col-lg-10">
-          <div id="plot9"></div>
-        </div>
-        <div class="col-lg-2">
-          <div id="plot10"></div>
-        </div>
-      </div>
-      <div class="row justify-content-md-center">
-        <div class="col-lg-6 align-self-center text-center inner-box">
-          <div id="plot15"></div>
-        </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div id="plot9"></div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-lg-12">
+      <div id="plot10"></div>
+    </div>
+  </div>
+  <hr>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div id="plot15"></div>
       </div>
     </div>
+  </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <!-- <script src="data/data.json"></script> -->
-    <script src="../static/js/line.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <!-- <script src="data/data.json"></script> -->
+  <script src="../static/js/line.js"></script>
 
-    {% endblock %}
+  {% endblock %}
+</div>

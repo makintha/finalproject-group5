@@ -1,4 +1,4 @@
-#import Flask 
+#import Flask
 from flask import Flask, render_template, request, jsonify
 import numpy as np
 import joblib
@@ -34,28 +34,33 @@ uni = Base.classes.uni_forecast
 prod = Base.classes.production
 
 
-#create an instance of Flask
+# create an instance of Flask
 app = Flask(__name__)
+
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
+
 @app.route('/multivariate')
 def land_multi():
-    return render_template('multivariate.html', coef = None)
+    return render_template('multivariate.html', coef=None)
+
 
 @app.route('/plots')
 def plot():
-    return render_template('plots.html', coef = None)
+    return render_template('plots.html', coef=None)
 
-### Multivariate
-@app.route('/predict', methods=['GET','POST'])
+# Multivariate
+
+
+@app.route('/predict', methods=['GET', 'POST'])
 def multivariate():
-    
+
     if request.method == "POST":
-        
-        #get form data
+
+        # get form data
         WaterRate = request.form.get('WaterRate')
         CasingHeadPressure = request.form.get('CasingHeadPressure')
         TubingHeadPressure = request.form.get('TubingHeadPressure')
@@ -63,26 +68,27 @@ def multivariate():
         Torque = request.form.get('Torque')
         GasRate = request.form.get('GasRate')
 
-        #call preprocessDataAndPredict and pass inputs
+        # call preprocessDataAndPredict and pass inputs
         try:
-            prediction, coef = preprocessDataAndPredictLR(WaterRate, CasingHeadPressure, TubingHeadPressure, PumpSpeed, Torque, GasRate)
-            #pass prediction to template
+            prediction, coef = preprocessDataAndPredictLR(
+                WaterRate, CasingHeadPressure, TubingHeadPressure, PumpSpeed, Torque, GasRate)
+            # pass prediction to template
             # print(prediction)
 
-            return render_template('multivariate.html', prediction = prediction[0], coef = coef)
-   
+            return render_template('multivariate.html', prediction=prediction[0], coef=coef)
+
         except ValueError:
             return "Please Enter valid values"
-  
+
         pass
     pass
 
-### Univariate
+# Univariate
 # @app.route('/univariate/', methods=['GET','POST'])
 # def univariate():
-    
+
 #     if request.method == "POST":
-        
+
 #         #get form data
 #         Date = request.form.get('Date')
 #         No_mos = request.form.get('No_of_months')
@@ -96,10 +102,10 @@ def multivariate():
 #             prediction = preprocessDataAndPredictLTSM(Date, No_mos)
 #             #pass prediction to template
 #             return render_template('predict.html', prediction = prediction)
-   
+
 #         except ValueError:
 #             return "Please Enter valid values"
-  
+
 #         pass
 #     pass
 
@@ -128,6 +134,7 @@ def Well7():
 
     return jsonify(all_data)
 
+
 @app.route("/api/v1.0/Well8")
 def Well8():
     # Create our session (link) from Python to the DB
@@ -150,6 +157,7 @@ def Well8():
 
     return jsonify(all_data)
 
+
 @app.route("/api/v1.0/Well9")
 def Well9():
     # Create our session (link) from Python to the DB
@@ -171,6 +179,7 @@ def Well9():
         all_data.append(well_9)
 
     return jsonify(all_data)
+
 
 @app.route("/api/v1.0/Well10")
 def Well10():
@@ -217,6 +226,7 @@ def Well15():
 
     return jsonify(all_data)
 
+
 @app.route("/api/v1.0/univariate")
 def uni_plot():
     # Create our session (link) from Python to the DB
@@ -238,6 +248,7 @@ def uni_plot():
 
     return jsonify(all_data)
 
+
 @app.route("/api/v1.0/prod")
 def production():
     # Create our session (link) from Python to the DB
@@ -245,14 +256,14 @@ def production():
 
     """Return a list production data"""
     # Query all county data
-    results = session.query(prod.Date, prod.Well,prod.WaterRate,prod.CasingHeadPressure,
-    	prod.TubingHeadPressure, prod.PumpSpeed, prod.Torque, prod.GasRate).all()
+    results = session.query(prod.Date, prod.Well, prod.WaterRate, prod.CasingHeadPressure,
+                            prod.TubingHeadPressure, prod.PumpSpeed, prod.Torque, prod.GasRate).all()
 
     session.close()
 
     # # Create a dictionary from the row data and append to a list of all_precipitation
     all_data = []
-    for d,w, wa, ca, tu, pu, to, ga in results: 
+    for d, w, wa, ca, tu, pu, to, ga in results:
         prods = {}
         prods["date"] = d
         prods['well'] = w
@@ -268,27 +279,27 @@ def production():
     return jsonify(all_data)
 
 
-
 def preprocessDataAndPredictLR(WaterRate, CasingHeadPressure, TubingHeadPressure, PumpSpeed, Torque, GasRate):
-    
-    #keep all inputs in array
-    test_data = [WaterRate, CasingHeadPressure, TubingHeadPressure, PumpSpeed, Torque, GasRate]
+
+    # keep all inputs in array
+    test_data = [WaterRate, CasingHeadPressure,
+                 TubingHeadPressure, PumpSpeed, Torque, GasRate]
     print(test_data)
-    
-    #convert value data into numpy array
+
+    # convert value data into numpy array
     test_data = np.array(test_data)
-    
-    #reshape array
-    test_data = test_data.reshape(1,-1)
+
+    # reshape array
+    test_data = test_data.reshape(1, -1)
     print(test_data)
-    
-    #open file
-    file = open("LR_model.pkl","rb")
-    
-    #load trained model
+
+    # open file
+    file = open("LR_model.pkl", "rb")
+
+    # load trained model
     trained_model = joblib.load(file)
-    
-    #predict
+
+    # predict
     prediction = trained_model.predict(test_data)
 
     # Coef
@@ -298,32 +309,31 @@ def preprocessDataAndPredictLR(WaterRate, CasingHeadPressure, TubingHeadPressure
 
 
 def preprocessDataAndPredictLTSM(date, No_of_months):
-    
-    #keep all inputs in array
+
+    # keep all inputs in array
     test_data = [Date, No_of_months]
     print(test_data)
-    
-    #convert value data into numpy array
+
+    # convert value data into numpy array
     test_data = np.array(test_data)
-    
-    #reshape array
-    test_data = test_data.reshape(1,-1)
+
+    # reshape array
+    test_data = test_data.reshape(1, -1)
     print(test_data)
-    
-    #open file
-    file = open("univariate_predictions.h5","rb")
-    
-    #load trained model
+
+    # open file
+    file = open("univariate_predictions.h5", "rb")
+
+    # load trained model
     trained_model = joblib.load(file)
-    
-    #predict
+
+    # predict
     prediction = trained_model.predict(test_data)
-    
+
     return prediction
-    
+
+
 if __name__ == '__main__':
     # app.run(debug=True)
-    app.debug=True
+    app.debug = True
     app.run()
-
-    

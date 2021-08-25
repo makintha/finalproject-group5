@@ -1,84 +1,193 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  
   <head>
-   
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    
-    
-    <title> Forecast Production Gas Rate </title>
+
+    <title>Forecast Production Gas Rate</title>
     <style>
+      #plot7 {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #plot8 {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #plot9 {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #plot10 {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #plot7 {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #plot15 {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      a.navbar-brand {
+        color: rgb(0, 0, 0) !important;
+        background: rgb(153, 127, 127);
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-left: 0x;
+        margin-bottom: 0px;
+        padding: 5px;
+        font-family: Georgia, Times, "Times New Roman", serif;
+        font-weight: bolder;
+        font-size: 20px;
+      }
+
+      button.navbar-toggler {
+        color: rgb(59, 32, 32);
+      }
+
+      body {
+        background: whitesmoke;
+      }
+      h1 {
+        font-size: 30px;
+      }
+      p {
+        font-size: 20px;
+      }
+      li {
+        font-size: 18px;
+      }
+      ul {
+        font-size: 25px;
+      }
+
       img#fig1 {
         float: right;
       }
       table {
         font-family: arial, sans-serif;
+        font-size: 15px;
         border-collapse: collapse;
         width: 450px;
         table-layout: fixed;
       }
-      
-      td, th {
-        border: 1px solid #dddddd;
+
+      td,
+      th {
+        border: 1px solid white;
         text-align: left;
         padding: 8px;
       }
-      
+
       tr:nth-child(even) {
-        background-color: #dddddd;
+        background-color: white;
       }
-      </style>
-
+    </style>
   </head>
-  
-  <body>
 
+  <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <div class="container-fluid nav_top">
         <a class="navbar-brand" href="/">Forecast</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse bg-white justify-content-end" id="navbarSupportedContent">
+        <div
+          class="collapse navbar-collapse bg-white justify-content-end"
+          id="navbarSupportedContent"
+        >
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-centre">
             <li class="nav-item bg-white">
-              <a class="nav-link active comparison" aria-current="page" href="/">Forecast Method</a>
+              <a class="nav-link active comparison" aria-current="page" href="/"
+                >Forecast Method</a
+              >
             </li>
             <li class="nav-item bg-white">
-              <a class="nav-link active comparison" aria-current="page" href="/multivariate">Multivariate</a>
+              <a
+                class="nav-link active comparison"
+                aria-current="page"
+                href="/multivariate"
+                >Multivariate</a
+              >
             </li>
+
             <li class="nav-item bg-white">
               <a class="nav-link active data" href="/plots">Visualizations</a>
             </li>
           </ul>
         </div>
       </div>
-  </nav>
+    </nav>
 
-      <div class="container pt-3">
-      
-        <div id="content">{% block content %}{% endblock %}</div>
-      
-        <div id="footer">
-          {% block footer %}
-          <div class="row">
+    <div class="container pt-3">
+      <div id="content">{% block content %}{% endblock %}</div>
 
-          </div>
-          {% endblock %}
-        </div>
+      <div id="footer">
+        {% block footer %}
+        <div class="row"></div>
+        {% endblock %}
       </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+
     <script scr="../static/js/line.js"></script>
   </body>
 </html>
